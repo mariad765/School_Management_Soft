@@ -26,7 +26,8 @@ List the key features of your project.
 - Streamlined Scheduling: Seamlessly create and manage class schedules, minimizing conflicts and maximizing resource utilization.
 - Assignment: Professors can chooseto specific classes and subjects based on their expertise and availability.
 - Classroom Allocation: Allocate classrooms and resources intelligently, avoiding double-bookings and overcrowding, also based on user's room preferrences.
-- ...
+- Customizable Constraints: Adapt the system to institution's unique scheduling constraints and requirements.
+- Configuration Options: data base string and table names, room names and times available.
 
 ## Getting Started
 
