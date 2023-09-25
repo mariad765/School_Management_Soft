@@ -875,7 +875,7 @@ namespace School_Management_Soft
                     string finishTableName = $"{groupName}_FinishTable";
                     seccondTableName = finishTableName;
 
-                    // Get the table schema (structure) and constraints from an existing table
+                    // Get the table schema and constraints from an existing table
                     string getTableSchemaSql1 = $"SELECT TOP 0 * INTO [{finishTableName}] FROM {Globals.Finished_shedule}";
                     string getTableSchemaSql2 = $"SELECT TOP 0 * INTO [{startTableName}] FROM {Globals.Table_schedule}";
 
@@ -967,6 +967,8 @@ namespace School_Management_Soft
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
 
         }
+        //.................................................................................................,,,,,,,,,//
+
 
         private void ChooseClass_Click(object sender, EventArgs e)
         {
@@ -994,7 +996,25 @@ namespace School_Management_Soft
         {
 
         }
+        //.................................................................................................,,,,,,,,,//
+        //.................................................................................................,,,,,,,,,//
 
+        /*Generate a PDF document from the given DataTable and save it to the specified filePath.
+        Parameters:
+        - table: The DataTable containing the data to be included in the PDF.
+        - filePath: The path where the generated PDF file will be saved. This must be modified in code as it can't be done in gui.
+        Detailed Description:
+        -Create a new PDF document using the iTextSharp library.
+        - Extract a document title from the 'seccondTableName' variable, removing underscores after the third occurrence.
+        - Attempt to create a PDF file at the specified 'filePath'.
+        - Add the document title to the PDF as a centered paragraph.
+        - Create a PdfPTable with the same number of columns as the DataTable.
+        - Add the column names from the DataTable as headers to the PdfPTable.
+        - Iterate through each row in the DataTable and add its cell values to the PdfPTable.
+        - Handle exceptions that may occur during PDF creation or writing, such as DocumentException and IOException, and show error messages in MessageBoxes.
+        - Finally, close the PDF document.
+        Note:
+        - This method uses the iTextSharp library for PDF creation.*/
         private void GeneratePDFFromTable(DataTable table, string filePath)
         {
             // Create a new document
@@ -1011,32 +1031,28 @@ namespace School_Management_Soft
 
             try
             {
-                // Create a PdfWriter instance to write to the file path
                 PdfWriter.GetInstance(document, new FileStream(filePath, FileMode.Create));
 
-               
-                // Open the document for writing
                 document.Open();
-                // Add the document title as a visible title
+              
                 if (!string.IsNullOrEmpty(documentTitle))
                 {
                     Paragraph titleParagraph = new Paragraph(documentTitle);
                     titleParagraph.Alignment = Element.ALIGN_CENTER;
                     document.Add(titleParagraph);
                 }
-                document.Add(new Paragraph(" ")); // Add an empty paragraph
+                document.Add(new Paragraph(" ")); 
 
-                // Create a PdfPTable to represent the table in the PDF
+             
                 PdfPTable pdfTable = new PdfPTable(table.Columns.Count);
 
-                // Add table headers
                 foreach (DataColumn column in table.Columns)
                 {
                     PdfPCell cell = new PdfPCell(new Phrase(column.ColumnName));
                     pdfTable.AddCell(cell);
                 }
 
-                // Add table data
+              
                 foreach (DataRow row in table.Rows)
                 {
                     foreach (var item in row.ItemArray)
@@ -1046,7 +1062,7 @@ namespace School_Management_Soft
                     }
                 }
 
-                // Add the table to the document
+              
                 document.Add(pdfTable);
             }
             catch (DocumentException de)
@@ -1061,17 +1077,22 @@ namespace School_Management_Soft
             }
             finally
             {
-                // Close the document
+                
                 document.Close();
             }
         }
+
+        //.................................................................................................,,,,,,,,,//
+        //.................................................................................................,,,,,,,,,//
+        //.................................................................................................,,,,,,,,,//
+        // Retrieve data from the specified table and return it as a DataTable.
         private DataTable RetrieveDataFromDynamicTable(string tableName)
         {
-            // Use the tableName to construct your SQL query to retrieve data from the dynamic table
+            
             string connectionString = Globals.connectionStringDefault;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string query = $"SELECT * FROM {tableName}"; // Construct the query with the dynamic table name
+                string query = $"SELECT * FROM {tableName}";
                 SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
                 DataTable dataTable = new DataTable();
                 adapter.Fill(dataTable);
@@ -1079,17 +1100,16 @@ namespace School_Management_Soft
             }
         }
 
+        //.................................................................................................,,,,,,,,,//
+        //.................................................................................................,,,,,,,,,//
+        // Create a settings form and display it for configuring School_Management settings.
         private void button1_Click_1(object sender, EventArgs e)
         {
-            // Create an instance of the School_Management class
             School_Management schoolManagementInstance = new School_Management();
 
-            // Create an instance of the new form and pass the schoolManagementInstance
             SettingsForm settingsForm = new SettingsForm(schoolManagementInstance);
 
-            // Show the new form
             settingsForm.Show();
-
         }
     }
 }
