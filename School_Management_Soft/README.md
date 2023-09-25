@@ -31,14 +31,13 @@ List the key features of your project.
 
 ## Getting Started
 
-Provide instructions for setting up and running your project locally.
-
 ### Prerequisites
 
 Before you begin, ensure you have the following prerequisites installed on your system:
 
 - **.NET Framework 5.0 (Optional as you can do the setup in VS)s**: The system is built using .NET, so you need to have .NET Framework 5.0 or later installed. You can download it from [here](https://dotnet.microsoft.com/download).
 - **SQL Server**: The system relies on a SQL Server database to store and manage school data. You can install SQL Server locally or connect to a remote SQL Server instance.
+- **SQL Database**: You will also need your own database with the specified constraints.
 - **Visual Studio**: While not mandatory, having Visual Studio installed can make development and testing more convenient. You can download Visual Studio from [here](https://visualstudio.microsoft.com/).
 - **iTextSharp**: This library is used for PDF generation within the system. You can find more information and download it [here](https://www.nuget.org/packages/iTextSharp/).
 
