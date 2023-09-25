@@ -47,6 +47,7 @@
             this.textBox_number_of_classes = new System.Windows.Forms.TextBox();
             this.Finish = new System.Windows.Forms.Button();
             this.PanelCover = new System.Windows.Forms.Panel();
+            this.Settings_button = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Title_Panel_Cover = new System.Windows.Forms.Label();
             this.ChooseClass = new System.Windows.Forms.Label();
@@ -139,18 +140,11 @@
             this.dropdown_room.Font = new System.Drawing.Font("Calibri", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dropdown_room.ForeColor = System.Drawing.Color.Teal;
             this.dropdown_room.FormattingEnabled = true;
-            this.dropdown_room.Items.AddRange(new object[] {
-            "Room A",
-            "Room B",
-            "Room C",
-            "Room D",
-            "Room E",
-            "Room F"});
             this.dropdown_room.Location = new System.Drawing.Point(838, 129);
             this.dropdown_room.Name = "dropdown_room";
             this.dropdown_room.Size = new System.Drawing.Size(121, 27);
             this.dropdown_room.TabIndex = 8;
-            this.dropdown_room.Text = "Room A";
+            this.dropdown_room.Text = "Room";
             this.dropdown_room.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label5
@@ -276,16 +270,31 @@
             // PanelCover
             // 
             this.PanelCover.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.PanelCover.Controls.Add(this.Settings_button);
             this.PanelCover.Controls.Add(this.pictureBox1);
             this.PanelCover.Controls.Add(this.Title_Panel_Cover);
             this.PanelCover.Controls.Add(this.ChooseClass);
             this.PanelCover.Controls.Add(this.groupNameComboBox);
             this.PanelCover.Controls.Add(this.AccessMain);
-            this.PanelCover.Location = new System.Drawing.Point(8, 12);
+            this.PanelCover.Location = new System.Drawing.Point(12, 12);
             this.PanelCover.Name = "PanelCover";
             this.PanelCover.Size = new System.Drawing.Size(1030, 743);
             this.PanelCover.TabIndex = 16;
             this.PanelCover.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelCover_Paint);
+            // 
+            // Settings_button
+            // 
+            this.Settings_button.BackColor = System.Drawing.Color.Teal;
+            this.Settings_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Settings_button.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Settings_button.Location = new System.Drawing.Point(770, 551);
+            this.Settings_button.Margin = new System.Windows.Forms.Padding(3, 3, 3, 1);
+            this.Settings_button.Name = "Settings_button";
+            this.Settings_button.Size = new System.Drawing.Size(214, 52);
+            this.Settings_button.TabIndex = 7;
+            this.Settings_button.Text = "Settings";
+            this.Settings_button.UseVisualStyleBackColor = false;
+            this.Settings_button.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // pictureBox1
             // 
@@ -477,6 +486,7 @@
         private System.Windows.Forms.Label Title_Panel_Cover;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button delete_bt;
+        private System.Windows.Forms.Button Settings_button;
     }
 }
 

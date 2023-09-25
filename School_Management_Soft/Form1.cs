@@ -35,6 +35,8 @@ namespace School_Management_Soft
         {
             // Get the initial data table into the data grid
             LoadDataIntoDataGridView();
+
+        
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -69,6 +71,7 @@ namespace School_Management_Soft
         }
 
         // Variables for managing the tables in database
+       
         private string groupNameClass;
         private string firstTableName;
         private string seccondTableName;
@@ -78,7 +81,7 @@ namespace School_Management_Soft
         //.................................................................................................,,,,,,,,,//
         private void bt_submit_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection("Data Source=localhost; Initial Catalog=test_database; Integrated Security=True");
+            SqlConnection con = new SqlConnection(Globals.connectionStringDefault);
             con.Open();
 
             // Get the number of classes per week from the input field
@@ -124,6 +127,7 @@ namespace School_Management_Soft
         private void LoadDataIntoDataGridView()
         {
             if (!PanelCover.Visible) 
+
             { 
                 using (SqlConnection con = new SqlConnection("Data Source = localhost; Initial Catalog = test_database; Integrated Security = True"))
                 {
@@ -137,6 +141,7 @@ namespace School_Management_Soft
                         dataGridView1.DataSource = dt;
                     }
                 }
+                PopulateComboBox();
             }
 
         }
@@ -145,7 +150,9 @@ namespace School_Management_Soft
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (!PanelCover.Visible)
-            { LoadDataIntoDataGridView(); }
+            { LoadDataIntoDataGridView();
+              
+       }
         }
         //.................................................................................................,,,,,,,,,//
 
@@ -216,23 +223,32 @@ namespace School_Management_Soft
         }
 
         //Predefined lists with rooms available and an additional empty list
-        private List<string> roomList = new List<string>
+  
+        public List<string> roomList_aux = new List<string>
         {
              "Room A", "Room B", "Room C", "Room D", "Room E", "Room F","Room G", "Room H", "Room I", "Room J", "Room K"
         };
 
-        private List<string> labList = new List<string>
+        public List<string> labList_aux = new List<string>
         {
               "Lab A", "Lab B", "Lab C", "Lab D", "Lab E", "Lab F","Lab G", "Lab H", "Lab I", "Lab J", "Lab K"
         };
         private List<string> usedRooms = new List<string>();
+        private void PopulateComboBox()
+        {
+            // Assuming you have a ComboBox named comboBoxRooms
+
+            // Concatenate the two lists and set them as the ComboBox's data source
+            dropdown_room.DataSource = Globals.roomList.Concat(Globals.labList).ToList();
+        }
+       
 
         //............................................................................................,,,,,,,.....,,//
         //...................Function for FINISH button to get all the data in the finished version...........,,,,,,//
         //.................................................................................................,,,,,,,,,//
         private void button1_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection("Data Source=localhost; Initial Catalog=test_database; Integrated Security=True");
+            SqlConnection con = new SqlConnection(Globals.connectionStringDefault);
 
 
             int capacity = 10; // Set an initial capacity for the arrays
@@ -320,29 +336,32 @@ namespace School_Management_Soft
 
                     // Reinit the lists for rooms available
 
-                    roomList = new List<string>
-                        {
-                 "Room A", "Room B", "Room C", "Room D", "Room E", "Room F","Room G", "Room H", "Room I", "Room J", "Room K"
-                        };
+                    roomList_aux = Globals.roomList;
 
-                    labList = new List<string>
-                        {
-                          "Lab A", "Lab B", "Lab C", "Lab D", "Lab E", "Lab F","Lab G", "Lab H", "Lab I", "Lab J", "Lab K"
-                        };
+
+                    labList_aux = Globals.labList;
                     usedRooms = new List<string>();
 
                     // Taking into account the preferences, try 
                     SuitableTimeSlot suitableTimeSlot = RandomChoiceTimeSlot(preferredTimes[i], preferredRooms[i]);
+                    TimeSpan targetTime1 = TimeSpan.FromHours(Globals.GivenTime1); // 8:00pm as a TimeSpan
+                    TimeSpan targetTime2 = TimeSpan.FromHours(Globals.GivenTime2); // 6:00am as a TimeSpan
+                    if (suitableTimeSlot.TimeSlot < targetTime2)
+                        suitableTimeSlot.TimeSlot = targetTime2;
+                    if (suitableTimeSlot.TimeSlot > targetTime1)
+                        suitableTimeSlot.TimeSlot = targetTime1;
+
                     bool successful = TryInsertion(suitableTimeSlot, userIds, firstNames, lastNames, subjects, i);
 
                     // Save the initial variables to restatrt searches
                     TimeSpan init_time = suitableTimeSlot.TimeSlot;
                     string init_room = suitableTimeSlot.Room;
-
-                    TimeSpan targetTime1 = TimeSpan.FromHours(20); // 8:00pm as a TimeSpan
-                    TimeSpan targetTime2 = TimeSpan.FromHours(6); // 6:00am as a TimeSpan
+                    MessageBox.Show("Time up value: " + Globals.GivenTime1.ToString());
+                    MessageBox.Show("Time down value: " + Globals.GivenTime2.ToString());
+                   
                     counter2 = 0; // Init counters shall be 0
                     counter1 = 0;
+                
 
                     /* Start searching a good time - room - day combo that doesnt involve colllisions
                      This code represents an algorithm for finding a suitable time slot, room, and day
@@ -417,15 +436,10 @@ namespace School_Management_Soft
                             if (!successful)
                             {
                                 usedRooms = new List<string>();
-                                roomList = new List<string>
-                                    {
-                                      "Room A", "Room B", "Room C", "Room D", "Room E", "Room F","Room G", "Room H", "Room I", "Room J", "Room K"
-                                    };
+                                roomList_aux = Globals.roomList;
 
-                                labList = new List<string>
-                                    {
-                                      "Lab A", "Lab B", "Lab C", "Lab D", "Lab E", "Lab F","Lab G", "Lab H", "Lab I", "Lab J", "Lab K"
-                                    };
+
+                                labList_aux = Globals.labList;
 
                             }
                             if (successful)
@@ -495,14 +509,14 @@ namespace School_Management_Soft
         {
             // This function will return a boolean if the insertion was successful or not
             bool insertedSuccessfully;
-            string connectionString = "Data Source=localhost;Initial Catalog=test_database;Integrated Security=True";
+            string connectionString = Globals.connectionStringDefault;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
 
                 // The insertion will take place in 2 Tables. One is the table for each class and one is an additional table used to
                 // avoid collisions
-                string insertQuery = "INSERT INTO Finished_shedule (User_ID, [First Name], [Last Name], Subject, Room, Time_Start, Time_End, Day_Of_Week) " +
+                string insertQuery = $"INSERT INTO {Globals.Finished_shedule} (User_ID, [First Name], [Last Name], Subject, Room, Time_Start, Time_End, Day_Of_Week) " +
                                   "VALUES (@UserID, @FirstName, @LastName, @Subject, @Room, @suitableTimeSlot, @TimeEnd, @DayOfWeek)";
                 string insertQuery2 = $"INSERT INTO {seccondTableName} (User_ID, [First Name], [Last Name], Subject, Room, Time_Start, Time_End, Day_Of_Week) " +
                                 "VALUES (@UserID, @FirstName, @LastName, @Subject, @Room, @suitableTimeSlot, @TimeEnd, @DayOfWeek)";
@@ -713,24 +727,26 @@ namespace School_Management_Soft
             }
 
             List<string> selectedList;
-            roomList.Add(inputRoom);
-            labList.Add(inputRoom);
+            roomList_aux.Add(inputRoom);
+            labList_aux.Add(inputRoom);
 
-            if (roomList.Contains(inputRoom))
+            if (roomList_aux.Contains(inputRoom))
             {
-                selectedList = roomList; 
+                selectedList = roomList_aux; 
             }
-            else if (labList.Contains(inputRoom))
+
+
+            else if (labList_aux.Contains(inputRoom))
             {
-                selectedList = labList; 
+                selectedList = labList_aux; 
             }
             else
             {
-                selectedList = roomList;
+                selectedList = roomList_aux;
                 MessageBox.Show(inputRoom); // Handle the case when the input room is not in either list
             }
-            roomList.Remove(inputRoom);
-            labList.Remove(inputRoom);
+            roomList_aux.Remove(inputRoom);
+            labList_aux.Remove(inputRoom);
 
             foreach (string room in selectedList)
             {
@@ -786,7 +802,7 @@ namespace School_Management_Soft
         private bool TableExists(string tableNamePrefix)
         {
             // Replace with your database connection string
-            string connectionString = "Data Source=localhost;Initial Catalog=test_database;Integrated Security=True";
+            string connectionString = Globals.connectionStringDefault;
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -845,7 +861,7 @@ namespace School_Management_Soft
 
         private void CreateDataTablesFromExisting(string groupName)
         {
-            string connectionString = "Data Source=localhost;Initial Catalog=test_database;Integrated Security=True";
+            string connectionString = Globals.connectionStringDefault;
 
             try
             {
@@ -860,8 +876,8 @@ namespace School_Management_Soft
                     seccondTableName = finishTableName;
 
                     // Get the table schema (structure) and constraints from an existing table
-                    string getTableSchemaSql1 = $"SELECT TOP 0 * INTO [{finishTableName}] FROM Finished_shedule";
-                    string getTableSchemaSql2 = $"SELECT TOP 0 * INTO [{startTableName}] FROM Table_schedule";
+                    string getTableSchemaSql1 = $"SELECT TOP 0 * INTO [{finishTableName}] FROM {Globals.Finished_shedule}";
+                    string getTableSchemaSql2 = $"SELECT TOP 0 * INTO [{startTableName}] FROM {Globals.Table_schedule}";
 
                     using (SqlCommand cmd = new SqlCommand())
                     {
@@ -902,7 +918,7 @@ namespace School_Management_Soft
                 int userID = Convert.ToInt32(selectedRow.Cells["NewKeyColumn"].Value);
 
                 // Create a SQL connection and command to delete the row
-                using (SqlConnection con = new SqlConnection("Data Source=localhost; Initial Catalog=test_database; Integrated Security=True"))
+                using (SqlConnection con = new SqlConnection(Globals.connectionStringDefault))
                 {
                     con.Open();
 
@@ -1052,7 +1068,7 @@ namespace School_Management_Soft
         private DataTable RetrieveDataFromDynamicTable(string tableName)
         {
             // Use the tableName to construct your SQL query to retrieve data from the dynamic table
-            string connectionString = "Data Source=localhost; Initial Catalog=test_database; Integrated Security=True";
+            string connectionString = Globals.connectionStringDefault;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 string query = $"SELECT * FROM {tableName}"; // Construct the query with the dynamic table name
@@ -1063,7 +1079,18 @@ namespace School_Management_Soft
             }
         }
 
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            // Create an instance of the School_Management class
+            School_Management schoolManagementInstance = new School_Management();
 
+            // Create an instance of the new form and pass the schoolManagementInstance
+            SettingsForm settingsForm = new SettingsForm(schoolManagementInstance);
+
+            // Show the new form
+            settingsForm.Show();
+
+        }
     }
 }
 
