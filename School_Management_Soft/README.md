@@ -37,13 +37,12 @@ Before you begin, ensure you have the following prerequisites installed on your 
 
 - **.NET Framework 5.0 (Optional as you can do the setup in VS)s**: The system is built using .NET, so you need to have .NET Framework 5.0 or later installed. You can download it from [here](https://dotnet.microsoft.com/download).
 - **SQL Server**: The system relies on a SQL Server database to store and manage school data. You can install SQL Server locally or connect to a remote SQL Server instance.
-- **SQL Database**: You will also need your own database with the specified constraints.
+- **SQL Database**: You will also need your own database with the specified constraints. [See database schema](https://github.com/mariad765/School_Management_Soft/blob/master/SqlQuery_1.sql).
 - **Visual Studio**: While not mandatory, having Visual Studio installed can make development and testing more convenient. You can download Visual Studio from [here](https://visualstudio.microsoft.com/).
 - **iTextSharp**: This library is used for PDF generation within the system. You can find more information and download it [here](https://www.nuget.org/packages/iTextSharp/).
 
 ### Installation
 
-Step-by-step instructions on how to install and configure your project. Include any necessary code examples.
 
 
 1. Clone the repository to your local machine:
@@ -53,19 +52,9 @@ Step-by-step instructions on how to install and configure your project. Include 
    ```
  2. Open the project in Visual Studio.
  3. Build and run the project and access the settings to set up the database connection string and other specific variables like names of room, times.
- 4. Make sure your database has the relevant constrains.
+ 4. Make sure your database has the relevant [constrains](https://github.com/mariad765/School_Management_Soft/blob/master/SqlQuery_1.sql).
 
  ## Usage
- 
-### Logging In
-
-1. Open your web browser and navigate to the system's URL, typically `http://localhost:5000` unless configured differently.
-
-2. You will be presented with the login page. Log in using your administrator credentials. If you don't have an account, please contact your system administrator for access.
-
-### Dashboard
-
-Upon logging in, you will land on the system's dashboard. The dashboard provides an overview of the system's status and important notifications.
 
 ### Managing Classes and Schedules
 
