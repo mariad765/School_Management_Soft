@@ -62,7 +62,13 @@ For this, you need to press the "Settings" button to enter the menu where you ca
 #### 1. Addind a Room:
 
 - Click on the "Room" section in the Settings menu.
+  
+  ![First Form Page](./../png/img4.png)
+- 
 - You can modify the table by deleting roomss and adding new rooms.
+
+  ![First Form Page](./../png/img5.png)
+
 - There are two collumns in the table. One can be used for small rooms/labs and the other can be used for bigger rooms like course rooms. 
 - Click "Save" to add the changed.
 
@@ -84,7 +90,10 @@ For this, you need to press the "Settings" button to enter the menu where you ca
 #### 4. Edit Database:
 
 - Access the "Database" section in the "Settings" menu.
-- Make the necessary changes to the database connection string, table names and other elements and click "Save"..
+- Make the necessary changes to the database connection string, table names and other elements and click "Save".
+  
+  ![First Form Page](./../png/img6.png)
+
 
 ### Schedule Management
 
