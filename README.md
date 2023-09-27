@@ -16,7 +16,7 @@ Project made using SQL, C# and .NET in Visual Studio and Microsoft SQL Server Ma
 
 This user-friendly system empowers administrators to efficiently manage class timetables, assignments, and classroom resources, ensuring a seamless and conflict-free educational environment
 
- ![First Form Page](./../png/img1.png)
+ ![First Form Page](./png/img1.png)
 
 ## Features
 
