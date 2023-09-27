@@ -75,6 +75,9 @@ For this, you need to press the "Settings" button to enter the menu where you ca
 #### 3. Edit Time:
 
 - Go to the "Time" section in the "Settings" menu.
+
+  ![First Form Page](./../png/img3.png)
+
 - In the two textboxes write the start_time and the end_time for the institution. It must be an integer.
 - Make the necessary changes and click "Save".
 
@@ -88,6 +91,8 @@ For this, you need to press the "Settings" button to enter the menu where you ca
 #### 1. Choose Class:
 
 - In the "Plan Your Classes" section, choose the class from the dropdown menu.
+
+  ![First Form Page](./../png/img2.png)
  ##### How classes work:
  Each class in the institution must have an unique name. It can be something derived from Faculty name, year of study and additional domain name.
 - After selecting the desired class, you can now press the "AcessMain" button to be able to introduce the preferences before downloading the schedule for that specific class.
