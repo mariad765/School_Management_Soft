@@ -356,8 +356,7 @@ namespace School_Management_Soft
                     // Save the initial variables to restatrt searches
                     TimeSpan init_time = suitableTimeSlot.TimeSlot;
                     string init_room = suitableTimeSlot.Room;
-                    MessageBox.Show("Time up value: " + Globals.GivenTime1.ToString());
-                    MessageBox.Show("Time down value: " + Globals.GivenTime2.ToString());
+                   
                    
                     counter2 = 0; // Init counters shall be 0
                     counter1 = 0;
