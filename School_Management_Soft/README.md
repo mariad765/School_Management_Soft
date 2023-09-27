@@ -74,7 +74,7 @@ For this, you need to press the "Settings" button to enter the menu where you ca
 
 #### 2. Editing a Class:
 
-- Click on the "Room" section in the Settings menu.
+- Click on the "Classes" section in the Settings menu.
 - Click on the class/course you want to edit. WARNING this feature is still not set in the code as it is pretty much the same as for the "Room" section.
 - Make the necessary changes and click "Save".
 
@@ -110,12 +110,30 @@ For this, you need to press the "Settings" button to enter the menu where you ca
 
 - Navigate to the "AccessMain" section.
 - The table shown will contain a list with all Prefessors, their subject and preferrences. There is no need to be guided by their preferences when choosing your own preferences as the soft will choose the best option for you when collisions occur.
+
+  ![First Form Page](./../png/img7.png)
+
 - Enter your information in the textboxes.
 - Choose preferred time and room. NOTE: the application will firstly search for a time up if the preferred time is not available in any room.
 - Click "Submit" to enter your preferences in the table.
+  
+  ![First Form Page](./../png/img8.png)
+
+  ![First Form Page](./../png/img9.png)
+
+
 - Click "Next" to add another set of information.
 - Click "Delete" to delete a selecte row from the table.
+
+  ![First Form Page](./../png/img10.png)
+
 - Click "Finish" to generate a PDF with the schedule for the chose class.
+  
+  ![First Form Page](./../png/img11.png)
+
+  ![First Form Page](./../png/img12.png)
+
+
 
 ### Additional information
 
